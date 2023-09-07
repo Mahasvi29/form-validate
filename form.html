@@ -1,0 +1,60 @@
+
+<html>
+<head>
+    <title>Form Validation</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form Validation</h1>
+    
+    <form id="myForm" action="#" method="post" onsubmit="return validateForm()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <span class="error" id="nameError"></span>
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <span class="error" id="emailError"></span>
+
+        <br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            let isValid = true;
+
+            // Validate Name
+            if (name === '') {
+                nameError.textContent = 'Name is required';
+                isValid = false;
+            } else {
+                nameError.textContent = '';
+            }
+
+        
+            if (email === '') {
+                emailError.textContent = 'Email is required';
+                isValid = false;
+            } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+                emailError.textContent = 'Invalid email format';
+                isValid = false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>
